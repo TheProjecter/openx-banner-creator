@@ -4,14 +4,14 @@
 
 Download the latest version of the plugin matching your current version of OpenX from http://code.google.com/p/openx-banner-creator/downloads/list
 
- *Log into OpenX as an admin
- *Switch to Administrator account
- *Go to Configuration tab
- *Click on Plugins in the menu on the left
+ * Log into OpenX as an admin
+ * Switch to Administrator account
+ * Go to Configuration tab
+ * Click on Plugins in the menu on the left
 
-Check the list of plugins and make sure openXZetaPrints plugin is not installed
+Check the list of plugins and make sure *openXZetaPrints* plugin is not installed
 
 Uninstall it if it is
 
- *Choose the downloaded plugin (a zip file) and click Install.
- *Scroll down the list to and check if openXZetaPrints plugin is installed
+ * Choose the downloaded plugin (a zip file) and click Install.
+ * Scroll down the list to and check if openXZetaPrints plugin is installed
