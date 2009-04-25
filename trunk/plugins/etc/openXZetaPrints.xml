@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href=""?>
+
+<plugin>
+    <name>openXZetaPrints</name>
+    <creationDate>2009-04-11</creationDate>
+    <author>merlex</author>
+    <authorEmail>xaseros@gmail.com</authorEmail>
+    <authorUrl>www</authorUrl>
+    <license>GPL</license>
+    <description>ZetaPrints</description>
+    <version>1.0.3</version>
+    <oxversion>2.7.30-beta-rc11</oxversion>
+    <!-- What is type? What is the difference between extension and package here? -->
+    <type>pakage</type>
+
+    <install>
+        <files>
+            
+            <!-- The contents of this file is displayed on the plugin details screen -->
+            <file path="{PLUGINPATH}">openXZetaPrints.readme.txt</file>
+
+            <!-- The contents of this file is displayed when uninstalling a plugin -->
+            <file path="{PLUGINPATH}">openXZetaPrints.uninstall.txt</file>
+        </files>
+
+        <!-- Specify the groups this plugin contains in the order they should be installed. -->
+        <contents>
+		   <group name="oxZetaPrints">0</group>		   
+        </contents>
+    </install>
+
+    <readme>
+        <!-- What goes in here? -->   
+    </readme>
+</plugin>
