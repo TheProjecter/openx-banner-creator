@@ -16,8 +16,22 @@ plugins/etc/oxZetaPrints/etc/postscript_install_ZetaPrints.php
 
 plugins/oxZetaPrints/account-user-zp.php
 plugins/oxZetaPrints/oxZetaPrints.class.php
-}}}}
+}}}
 
+*plugins/etc/openXZetaPrints.readme.txt* - фаил с текстом показываемым пользователю перед установкой.
+
+*plugins/etc/openXZetaPrints.uninstall.txt* - фаил с текстом показываемым пользователю перед удалением
+
+*plugins/etc/openXZetaPrints.xml* - служебный фаил плагина с описанием названия, версии и файлов входящих в состав архива.
+
+*plugins/etc/oxZetaPrints/oxZetaPrints.xml* - служебный фаил плагина с описанием файлов входящих в состав плагина.
+
+*plugins/etc/oxZetaPrints/etc/postscript_install_ZetaPrints.php* - фаил запускающийся при установке плагина, производит модификацию файлов и БД OpenX
+
+*plugins/oxZetaPrints/account-user-zp.php* - интеревейс конфигурирования zetapitns аккаунта, копируется в папку www/admin
+
+
+ 
 = Details =
 
 Add your content here.  Format your content with:
