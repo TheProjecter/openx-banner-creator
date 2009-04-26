@@ -11,7 +11,7 @@ For example, you have 25 banners of different types and sizes running across dif
 == A solution ==
 Banners created by ZetaPrints image generator using templates can also be updated using the same templates and ZetaPrints image generator.
 
-Assume that a catalog has 10 banner. They have some text fields in common. One of them is "Special info". Today's special is "Free shipping". Selected banners for a campaign get updated with their existing texts and images + the new text for "Special info" in one step. Newly generated banner images are automatically uploaded into OpenX and become available immediately.
+Assume that a catalog has 10 banner. They have some text fields in common. One of them is "Special info". Today's special is "Free shipping". Selected banners for a campaign get updated with their existing texts and images + the new text for "Special info" in one step from within OpenX. Newly generated banner images are automatically downloaded into OpenX and become available immediately.
 
 == Features ==
 
