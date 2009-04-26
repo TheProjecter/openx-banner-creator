@@ -1,10 +1,10 @@
 = Introduction =
 
-Плагин openXZetaPrints имеет Согласно спецификации плагинов для OpenX 2.8
+Плагин openXZetaPrints имеет структуру согласно спецификации плагинов для OpenX 2.8
 
 плагин содержит следующие файлы.
 
-
+{{{
 plugins/etc/openXZetaPrints.readme.txt
 plugins/etc/openXZetaPrints.uninstall.txt
 plugins/etc/openXZetaPrints.xml
@@ -16,6 +16,7 @@ plugins/etc/oxZetaPrints/etc/postscript_install_ZetaPrints.php
 
 plugins/oxZetaPrints/account-user-zp.php
 plugins/oxZetaPrints/oxZetaPrints.class.php
+}}}}
 
 = Details =
 
