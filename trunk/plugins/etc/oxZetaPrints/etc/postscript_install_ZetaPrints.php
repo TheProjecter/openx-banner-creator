@@ -6,7 +6,6 @@ class postscript_install_ZetaPrints {
 
 	function execute(){
 
-		//echo "New Hellp world!!";
 
 		// Parsing file with the settings
 		$set = parse_ini_file(OX_PATH."/var/".$_SERVER['HTTP_HOST'].".conf.php", 1);
@@ -31,7 +30,7 @@ class postscript_install_ZetaPrints {
 		} else  {
 			$this->addLog("","Modifed table {$set['table']['prefix']}users is needless. OK");
 		}
-		
+
 		//copy file in the admin dirrectory
 		if (copy(OX_PATH."/plugins/oxZetaPrints/account-user-zp.php", OX_PATH."/www/admin/account-user-zp.php")) {
 			$this->addLog("copy_file","Copy file ".OX_PATH."/plugins/account-user-zp.php"." to ".OX_PATH."/www/admin");
@@ -39,7 +38,7 @@ class postscript_install_ZetaPrints {
 			$this->addLog("error","Copy file ".OX_PATH."/plugins/account-user-zp.php"." to ".OX_PATH."/www/admin - ERROR");
 		}
 
-		
+
 		// 1 step
 		$cont=file_get_contents($file=OX_PATH."/lib/OA/Admin/Option.php");
 		if (strpos($cont,'$aSections[\'zp\']')===false){
@@ -55,32 +54,31 @@ $aSections[\'zp\'] =
 //end openXZetaPrints modification
   
 $aSections[\'name-language\']',$cont);
-						
+
 			file_put_contents($file, $cont);
 			$this->addLog('modification', "Modification $file - OK");
 		} else {
 			$this->addLog('', "Modification $file is needless - OK");
 		}
-		
-		
-		//2 step
-		
+
+
+		//Open file banner-edit.php
+
 		$cont=file_get_contents($file=OX_PATH."/www/admin/banner-edit.php");
-		$cont = preg_replace('/\/\/ZetaPrints modification.*?\/\/ZetaPrints end/is','',$cont);		
-		
-		if (strpos($cont,'//ZetaPrints modification')===false){
 
-			
-			
-//Form Building. Addindg form to request to ZP.
+		//Open find and clearing old ZetaPrints code parts if this is exist.
 
-			
-$cont=str_replace('$form->addElement($header);','
+		$cont = preg_replace('/\/\/ZetaPrints modification.*?\/\/ZetaPrints end/is','',$cont);
+
+		//Addindg hidden form to request to ZP.
+		if (strpos($cont, '$form->addElement($header);')!==false){
+
+			$cont=str_replace('$form->addElement($header);','
 $form->addElement($header);
 				
 //ZetaPrints modification
 if ($GLOBALS[\'_MAX\'][\'CONF\'][\'plugins\'][\'openXZetaPrints\']){ 
-$ZPresult = mysql_query("SELECT guid, rett, actionurl, zpmem FROM ox_users WHERE user_id = \'".OA_Permission::getUserId()."\'");  
+$ZPresult = mysql_query("SELECT guid, rett, actionurl, zpmem FROM {$GLOBALS[\'_MAX\'][\'CONF\'][\'table\'][\'prefix\']}_users WHERE user_id = \'".OA_Permission::getUserId()."\'");  
 while ($zprow = mysql_fetch_array($ZPresult)) {  
        
      $rett = $zprow[\'rett\'];  
@@ -89,7 +87,7 @@ while ($zprow = mysql_fetch_array($ZPresult)) {
      if($zprow[\'guid\'] == "") {  
          $zpguidbare = str_replace(\'.\', \'\', uniqid($_SERVER[\'REMOTE_ADDR\'], TRUE));    
          $zpguid = md5($zpguidbare);  
-         mysql_query("UPDATE ox_users SET guid = \'".$zpguid."\' WHERE user_id = \'".OA_Permission::getUserId()."\'");  
+         mysql_query("UPDATE {$GLOBALS[\'_MAX\'][\'CONF\'][\'table\'][\'prefix\']}_users SET guid = \'".$zpguid."\' WHERE user_id = \'".OA_Permission::getUserId()."\'");  
      } else {  
          $zpguid = $zprow[\'guid\'];  
      }         
@@ -130,11 +128,17 @@ $basename = basename($_GET[\'zpbannerurl\']);
 //ZetaPrints end
 ',$cont);
 
+			$this->addLog('replace', "Replace fragment and add hidden form and add handler in $file - OK");
+				
+		} else {
+			$this->addLog('error', "Not found place in code to insert hidden form and add handler in $file - ERROR");
+		}
 
-// Form build.
+		// Add button to the upload form.
 
+		if (strpos($cont,'if ($vars[\'handleSWF\']) {')!==false){
 
-$cont=str_replace('if ($vars[\'handleSWF\']) {','
+			$cont=str_replace('if ($vars[\'handleSWF\']) {','
 //ZetaPrints modification. Adding button.
 if ($GLOBALS[\'_MAX\'][\'CONF\'][\'plugins\'][\'openXZetaPrints\']){
 $uploadG[\'button\'] = $form->createElement(\'button\', "zpupl", "Upload from ZetaPrints", array(\'onclick\' => \'getElementById("zpsubmit").submit();\',\'value\'=>\'Upload From ZetaPrints\'));
@@ -145,18 +149,23 @@ $uploadG[\'button\'] = $form->createElement(\'button\', "zpupl", "Upload from Ze
 //ZetaPrints end            
 if ($vars[\'handleSWF\']) {
 ',$cont);
+			$this->addLog('replace', "Replace fragment for add button to upload from ZetaPrintin $file - OK");
+		} else {
+			$this->addLog('error', "Not found place in code to insert button to upload from ZetaPrintin $file - OK");
+		}
 			
 
-$cont=str_replace('"<img src=\'".OX::assetPath()."/images/".','//ZetaPrints modification
+		//Add image displaying after ZetaPrint redirect.
+
+		if (strpos('"<img src=\'".OX::assetPath()."/images/".',$cont)!==false) {
+			$cont=str_replace('"<img src=\'".OX::assetPath()."/images/".','//ZetaPrints modification
 ($_GET[\'zpbannerurl\'] ? "<input type=\'hidden\' name=\'zpfilename\' value=\'{$vars[\'fileName\']}\'> <div><img src=\'".dirname(dirname($_SERVER[\'PHP_SELF\']))."/images/".$vars[\'fileName\']."\'></div>" : "").
 //ZetaPrints end
 "<img src=\'".OX::assetPath()."/images/".',$cont);
 
+			// Form proccessing. Check the uploaded file and get info of it.
 
-// Form proccessing.
-
-
-$cont=str_replace('// Deal with any files that are uploaded.','//ZetaPrints modification 
+			$cont=str_replace('// Deal with any files that are uploaded.','//ZetaPrints modification
     if ($GLOBALS[\'_MAX\'][\'CONF\'][\'plugins\'][\'openXZetaPrints\'] and is_file($file=dirname(dirname(__FILE__))."/images/".$aVariables[\'filename\']) and isset($_POST[\'zpfilename\'])){
     	list($width, $height, $extnum, $attr) = getimagesize($file);
     	    $aVariables[\'contenttype\']   = ($ct=strtolower(substr(strrchr($aVariables[\'filename\'],"."),1)))==\'jpg\' ? \'jpeg\' : $ct;
@@ -168,88 +177,27 @@ $cont=str_replace('// Deal with any files that are uploaded.','//ZetaPrints modi
     
     // Deal with any files that are uploaded.
 ',$cont);
-
-
-//Form proccessing
-
-
-$cont = str_replace('$aVariables[\'filename\']        = !empty($aBanner[\'filename\']) ? $aBanner[\'filename\'] : \'\';','$aVariables[\'filename\']        = !empty($aBanner[\'filename\']) ? $aBanner[\'filename\'] : \'\';
+			$this->addLog('replace', "Replace fragment check the uploaded file and get info of it in $file - OK");
+		} else {
+			$this->addLog('error', "Not found place in code to insert button to upload from ZetaPrintin $file - OK");
+		}
+		// Replace filename in variable.
+		if (strpos('$aVariables[\'filename\']        = !empty($aBanner[\'filename\']) ? $aBanner[\'filename\'] : \'\';',$cont)!==false) {
+			$cont = str_replace('$aVariables[\'filename\']        = !empty($aBanner[\'filename\']) ? $aBanner[\'filename\'] : \'\';','$aVariables[\'filename\']        = !empty($aBanner[\'filename\']) ? $aBanner[\'filename\'] : \'\';
 //ZetaPrints modification   	
    	if ($_POST[\'zpfilename\']){
    		$aVariables[\'filename\']=mysql_real_escape_string($_POST[\'zpfilename\']);
    	}
 //ZetaPrints end
-',$cont);
-
-$cont= str_replace('','',$cont);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-file_put_contents($file,$cont);
-		
-		
-		
-} else {
-			$this->addLog('', "Modification $file is needless - OK");
-		}
-		
-/*		
-		//3 step
-		$cont=file_get_contents($file=OX_PATH."/www/admin/banner-edit.php");
-		if (strpos($cont,'')===false){
-			$cont=str_replace('','
-//openXZetaPrints modification	
-
-
-
-//end openXZetaPrints modification
-			',$cont);
-			file_put_contents($file,$cont);
+',$cont);	
+			$this->addLog('replace', "Replace fragment check the uploaded file and get info of it in $file - OK");
 		} else {
-			$this->addLog('', "Modification $file is needless - OK");
-		}		
-		
-		//4 step
-		$cont=file_get_contents($file=OX_PATH."/www/admin/banner-edit.php");
-		if (strpos($cont,'')===false){
-			$cont=str_replace('','
-//openXZetaPrints modification	
-
-
-
-//end openXZetaPrints modification
-			',$cont);
-			file_put_contents($file,$cont);
-		} else {
-			$this->addLog('', "Modification $file is needless - OK");
+			$this->addLog('error', "Not found place in code to insert checking of uploaded file and get info of it in $file - OK");
 		}
-		
-		//5 step
-		$cont=file_get_contents($file=OX_PATH."/www/admin/banner-edit.php");
-		if (strpos($cont,'')===false){
-			$cont=str_replace('','
-//openXZetaPrints modification	
 
+		$this->addLog('modification', "Modification $file - OK");
+		file_put_contents($file,$cont);
 
-
-//end openXZetaPrints modification
-			',$cont);
-			file_put_contents($file,$cont);
-		} else {
-			$this->addLog('', "Modification $file is needless - OK");
-		}
-*/
 		return true;
 	}
 
