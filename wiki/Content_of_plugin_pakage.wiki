@@ -30,7 +30,7 @@ plugins/oxZetaPrints/oxZetaPrints.class.php
 
 *plugins/oxZetaPrints/account-user-zp.php* - интеревейс конфигурирования zetapitns аккаунта, копируется в папку www/admin
 
-
+*plugins/oxZetaPrints/oxZetaPrints.class.php* - класс плагина. Содержит метод выдающий название.
  
 = Details =
 
