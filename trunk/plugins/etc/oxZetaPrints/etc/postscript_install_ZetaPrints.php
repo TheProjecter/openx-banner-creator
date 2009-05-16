@@ -20,7 +20,10 @@ class postscript_install_ZetaPrints {
 			ALTER TABLE `{$set['table']['prefix']}users` ADD `guid` VARCHAR( 255 ) NULL AFTER `sso_user_id` ,
 			ADD `zpmem` VARCHAR( 5 ) NOT NULL DEFAULT 'No' AFTER `guid` ,
 			ADD `rett` VARCHAR( 5 ) NOT NULL DEFAULT 'png' AFTER `zpmem` ,
-			ADD `actionurl` VARCHAR( 255 ) NOT NULL DEFAULT 'http://zetaprints.com/?page=templates;Keywords=Internet%20banner' AFTER `rett`";
+			ADD `actionurl` VARCHAR( 255 ) NOT NULL DEFAULT 'http://zetaprints.com/?page=templates;Keywords=Internet%20banner' AFTER `rett`,
+			ADD `zp` TINYINT NOT NULL ,
+			ADD `zpxml` TEXT NOT NULL ;
+			";
 			if (mysql_query($sql)){
 				$this->addLog("sql_query","Modifed table {$set['table']['prefix']}users complite. OK");
 			} else {
