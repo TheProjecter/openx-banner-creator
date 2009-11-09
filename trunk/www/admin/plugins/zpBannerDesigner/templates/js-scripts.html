@@ -1,0 +1,224 @@
+{* *}
+
+{* this is script which will be plugged on plugin page when added as a form element
+ make sure the form element name adding this script is the same as template file without .html extension
+ eg. this script should be added via 'campaign-script' name
+ 
+ When script is included it is assigned two variables:
+  - $plugin - contains plugin name, eg. 'oxMarket' 
+  - $pluginWebPath - absolute url to browser visible plugin directory eg. 'http://localhost/www/admin/plugins/oxMarket'. Can be used for to create a link to plugin's js/css
+  
+ Also, there is a global variable available:
+ - $adminPluginWebPath - absolute url to browser visible admin plugins directorory eg. 'http://localhost/www/admin/plugins' - this could be used if eg. to reference resources of another plugin
+ 
+ *}
+<script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery-ui-1.6.custom.min.js"></script>
+<script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/colorpicker.js"></script>
+<script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery-qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery.dd.js"></script>
+<script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery.vchecks.js"></script>
+
+<script type="text/javascript">
+{literal}
+//<![CDATA[
+jQuery(document).ready(function($) {
+  template_id = '';
+
+  $('#thirdLevelTools ul li:first a').attr('href', 'http://www.zetaprints.com/help/openx-image-generator/');
+
+  function has_banner_description () {
+    {/literal}{if $bannerid == ''}{literal}
+    return $('#banner-description').val().length != 0;
+    {/literal}{else}{literal}
+    return true;
+    {/literal}{/if}{literal}
+  }
+
+  $('#banner-description').keyup(function () {
+    $('div.zetaprints-form div.left-column input.save-image').attr('disabled', !has_banner_description());
+  });
+
+  $('#zetaprints-show-search-results').click(function () {
+    $('div.zetaprints-search div.results').slideToggle(1000, function() {
+      $('#zetaprints-show-search-results div.state').toggle();
+    });
+
+    return false;
+  });
+
+  $('div.zetaprints-search form').submit(function () {
+    var search_button = $('input:submit', this).css('display', 'none');
+    $('#zetaprints-show-search-results').css('display', 'none');
+    $('#zetaprints-search-processing-message').css('display', 'inline');
+
+    $.ajax({
+      url: '{/literal}{$adminPluginWebPath}{literal}/zpBannerDesigner/banner-designer.php',
+      type: 'POST',
+      data: 'ajax=search&' + $('div.zetaprints-search form').serialize(),
+      dataType: 'text',
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        $('#zetaprints-search-processing-message').css('display', 'none');
+        $(search_button).css('display', 'inline');
+        alert('Can\'t process search request: ' + textStatus); },
+      success: function (data, textStatus) {
+        $('div.zetaprints-search div.results').html(data + '<div class="clear" />').css('display', 'block');
+        
+        $('#zetaprints-show-search-results div.state').css('display', 'none');
+        $('#zetaprints-show-search-results div.state:first + div').css('display', 'block');
+        $('#zetaprints-show-search-results').css('display', 'block');
+
+        $('div.zetaprints-search div.results div.template').click(function () {
+          $('#zetaprints-form-loading').remove();
+          $('#' + template_id).removeClass('selected')
+          $('<div id="zetaprints-form-loading" />').css('opacity', 0.7).appendTo(this);
+
+          template_id = $(this).attr('id');
+
+          $.ajax({
+            url: '{/literal}{$adminPluginWebPath}{literal}/zpBannerDesigner/banner-designer.php',
+            type: 'POST',
+            data: 'ajax=form&template_id=' + template_id,
+            dataType: 'html',
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              $('#zetaprints-form-loading').remove();
+              alert('Can\'t retrieve design form: ' + errorThrown); },
+            success: function (data, textStatus) {
+              data = data.split('|');
+              $('div.zetaprints-form div.right-column').html(data[0]);
+              $('div.zetaprints-form div.left-column div.inner').html(data[1]);
+
+              form_elements();
+
+              $('div.zetaprints-form input.update-preview').click(update_preview);
+
+              $('div.zetaprints-search div.results, div.zetaprints-form').fadeOut(500, function () {
+                $('#zetaprints-show-search-results div.state').css('display', 'none');
+                $('#zetaprints-show-search-results div.state:first').css('display', 'block');
+                $('#zetaprints-show-search-results').fadeIn(500);
+
+                $('div.zetaprints-form').fadeIn(500);
+                $('#zetaprints-form-loading').remove();
+                $('#' + template_id).addClass('selected');
+              } );
+            }
+          });
+        });
+
+        $('#zetaprints-search-processing-message').css('display', 'none');
+        $('#zetaprints-show-search-results').css('display', 'block');
+        $(search_button).css('display', 'inline'); }
+    });
+
+    return false;
+  });
+
+  $('div.zetaprints-form form').submit(function() { return false; } );
+
+  function update_preview () {
+    $('div.zetaprints-form div.left-column > input').attr('disabled', true);
+    $('#zetaprints-update-processing-message').css('display', 'inline');
+
+    $.ajax({
+      url: '{/literal}{$adminPluginWebPath}{literal}/zpBannerDesigner/banner-designer.php',
+      type: 'POST',
+      data: 'ajax=preview&template_id=' + template_id + '&' + $('div.zetaprints-form form').serialize(),
+      dataType: 'text',
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        $('#zetaprints-update-processing-message').css('display', 'none');
+        $('div.zetaprints-form div.left-column > input').attr('disabled', false);
+
+        alert('Can\'t get preview image: ' + textStatus); },
+      success: function (data, textStatus) {
+        $('#preview-image-page-1 img').attr('src', data);
+
+        $('#zetaprints-update-processing-message').css('display', 'none');
+        $('div.zetaprints-form div.left-column input.update-preview').attr('disabled', false);
+
+        $('div.zetaprints-form div.left-column input.save-image').attr('disabled', !has_banner_description()).css('display', 'inline');
+        }
+    });
+  }
+
+  function save_image () {
+    $('#zetaprints-save-processing-message').css('display', 'inline');
+    var image_id = $('#preview-image-page-1 img').attr('src');
+
+    var data_dict = {
+      ajax: 'save-image',
+      bannerid: '{/literal}{$bannerid}{literal}',
+      campaignid: '{/literal}{$campaignid}{literal}',
+      clientid: '{/literal}{$clientid}{literal}',
+      image_url: image_id.split('/preview/')[1],
+      template_id: template_id,
+      description: $('#banner-description').val(),
+      type: $('#banner-type').val()
+    }
+
+    $.ajax({
+      url: '{/literal}{$adminPluginWebPath}{literal}/zpBannerDesigner/banner-designer.php',
+      type: 'POST',
+      data: data_dict,
+      dataType: 'text',
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        $('#zetaprints-save-processing-message').css('display', 'none');
+        alert('Can\'t update banner image: ' + textStatus); },
+      success: function (data, textStatus) {
+        window.location='{/literal}{$adminWebPath}{literal}/' + data;
+      }
+    });
+  }
+
+  $('div.zetaprints-form form input.save-image').click(save_image);
+
+  function form_elements () {
+
+    $('div.zetaprints-page-color-pickers ul.colors-selector li').each(function () {
+      var color_sample = $('div.color-sample', this);
+      var color_input = $('input.color', this);
+
+      $(color_sample).ColorPicker({
+        color: '#804080',
+        onBeforeShow: function (colpkr) {
+          $(colpkr).draggable();
+          return false;
+        },
+        onShow: function (colpkr) {
+          $(colpkr).fadeIn(500);
+          return false;
+        },
+        onHide: function (colpkr) {
+          $(colpkr).fadeOut(500);
+          return false;
+        },
+        onSubmit: function (hsb, hex, rgb, el) {
+          $(color_sample).css('backgroundColor', '#' + hex);
+          $(color_input).val('#' + hex).attr('checked', true).change();
+          $(el).ColorPickerHide();
+        }
+      });
+    });
+
+    $('div.zetaprints-page-input-fields input[title], div.zetaprints-page-input-fields textarea[title]').qtip({
+     position: { corner: { target: 'bottomLeft' } },
+         show: { delay: 1, solo: true, when: { event: 'focus' } },
+         hide: { when: { event: 'unfocus' } }
+   });
+
+    $('div.zetaprints-page-stock-images select[title]').qtip({
+      position: { corner: { target: 'topLeft' }, adjust: { y: -30 } },
+          show: { delay: 1, solo: true, when: { event: 'focus' } },
+          hide: { when: { event: 'unfocus' } }
+    });
+
+    $('div.zetaprints-page-stock-images select.stock-images-selector').msDropDown();
+
+    $('div.zetaprints-page-color-pickers ul.colors-selector').vchecks();
+  }
+
+  {/literal}{if $bannerid != ''}{literal}
+    form_elements();
+  {/literal}{/if}{literal}
+});
+//]]>
+{/literal}
+</script>

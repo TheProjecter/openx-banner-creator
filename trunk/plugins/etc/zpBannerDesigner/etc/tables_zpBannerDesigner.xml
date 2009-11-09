@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="xsl/mdb2_schema.xsl"?>
+<database>
+  <name>zpBannerDesigner</name>
+  <create>true</create>
+  <overwrite>false</overwrite>
+  <version>000</version>
+  <status>final</status>
+
+  <table>
+    <name>zpusers</name>
+
+    <declaration>
+      <field>
+        <name>user_id</name>
+        <type>openads_mediumint</type>
+        <length>9</length>
+        <notnull>true</notnull>
+        <default></default>
+      </field>
+
+      <field>
+        <name>zp_user_id</name>
+        <type>openads_varchar</type>
+        <length>36</length>
+        <notnull>true</notnull>
+        <default></default>
+      </field>
+
+      <index>
+        <name>zpusers_pkey</name>
+        <primary>true</primary>
+        <field>
+          <name>user_id</name>
+          <sorting>ascending</sorting>
+        </field>
+      </index>
+    </declaration>
+  </table>
+
+  <table>
+    <name>zpbanners</name>
+
+    <declaration>
+      <field>
+        <name>banner_id</name>
+        <type>openads_mediumint</type>
+        <length>9</length>
+        <notnull>true</notnull>
+        <default></default>
+      </field>
+
+      <field>
+        <name>zp_banner_id</name>
+        <type>openads_varchar</type>
+        <length>36</length>
+        <notnull>true</notnull>
+        <default></default>
+      </field>
+
+      <index>
+        <name>zpbanners_pkey</name>
+        <primary>true</primary>
+        <field>
+          <name>banner_id</name>
+          <sorting>ascending</sorting>
+        </field>
+      </index>
+    </declaration>
+  </table>
+</database>

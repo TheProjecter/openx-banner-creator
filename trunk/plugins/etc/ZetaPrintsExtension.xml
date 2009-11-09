@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin>
+  <name>ZetaPrintsExtension</name>
+  <creationDate>2009-04-11</creationDate>
+  <author>Anatoly A. Kazantsev</author>
+  <authorEmail>anatoly.kazantsev@gmail.com</authorEmail>
+  <authorUrl>www</authorUrl>
+  <license>GNU GPL2</license>
+  <description>ZetaPrints web-to-print extension</description>
+  <version>0.1-dev</version>
+  <oxversion>2.8.2</oxversion>
+  <type>package</type>
+
+  <install>
+    <files>
+      <!-- The contents of this file is displayed on the plugin details screen -->
+      <!-- <file path="{PLUGINPATH}">openXZetaPrints.readme.txt</file> -->
+
+      <!-- The contents of this file is displayed when uninstalling a plugin -->
+      <!-- <file path="{PLUGINPATH}">openXZetaPrints.uninstall.txt</file> -->
+    </files>
+
+    <!-- Specify the groups this plugin contains in the order they should be installed. -->
+    <contents>
+      <group name="zpBannerDesigner">0</group>
+    </contents>
+  </install>
+
+  <readme>
+    <!-- What goes in here? -->
+  </readme>
+</plugin>

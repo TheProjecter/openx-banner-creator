@@ -1,0 +1,231 @@
+div.bannercode img {
+  display: none;
+}
+
+div.zetaprints-search form {
+  margin-bottom: 20px;
+  float: left;
+}
+
+div.zetaprints-search form label {
+  margin-right: 5px;
+}
+
+span#zetaprints-search-processing-message {
+  display: none;
+  margin-left: 5px;
+}
+
+span#zetaprints-search-processing-message img {
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+div.zetaprints-search div.results div.template {
+  float: left;
+  margin: 0px 8px 8px 0px;
+  padding: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+div.zetaprints-search div.results div.template:hover {
+  border: 1px solid #ddd;
+}
+
+div.zetaprints-search div.results div.template.selected {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+
+div.zetaprints-search div.results div.template span {
+  display: block;
+  text-align: center;
+}
+
+div#zetaprints-form-loading {
+  background-color: #f4f4f4;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-image: url('../images/ajax-loader-big.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: default;
+}
+
+div.zetaprints-search div.clear {
+  clear: both;
+}
+
+div.zetaprints-search a.button {
+  display: block;
+  border: 1px solid #DDDDDD;
+  padding: 4px;
+  -moz-border-radius: 5px;
+  background-color: #f4f4f4;
+  margin-left: 20px;
+}
+
+a#zetaprints-show-search-results {
+  display: none;
+  float: left;
+}
+
+div.zetaprints-search a.button div.arrow {
+  float: left;
+  width: 0px;
+  height: 0px;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+}
+
+div.zetaprints-search a.button div.arrow.up {
+  border-bottom: 1em solid #255792;
+  margin-top: 1px;
+}
+
+div.zetaprints-search a.button div.arrow.down {
+  border-top: 1em solid #255792;
+  margin-top: 2px;
+}
+
+div.zetaprints-search a.button div.text {
+  float: left;
+  margin-left: 4px;
+}
+
+div.zetaprints-form {
+  display: none;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+div.zetaprints-form div.banner-options {
+  background-color: #f4f4f4;
+  padding: 7px 10px;
+  border: 1px solid #DDDDDD;
+  margin-bottom: 15px;
+}
+
+div.zetaprints-form div.banner-options label {
+  margin-right: 5px;
+}
+
+div.zetaprints-form div.left-column {
+  float: left;
+  width: 40%;
+}
+
+div.zetaprints-form div.left-column div.inner {
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+div.zetaprints-form div.left-column span.processing-message {
+  display: none;
+}
+
+div.zetaprints-form div.left-column input.update-preview, div.zetaprints-form div.left-column input.save-image {
+  margin-right: 5px;
+}
+
+div.zetaprints-form div.left-column input.save-image {
+  display: none;
+}
+
+div.zetaprints-form div.left-column span img {
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+div.zetaprints-form div.right-column {
+  float: left;
+  width: 60%;
+}
+
+div.zetaprints-form dl, div.zetaprints-form dl dd {
+  margin: 0px;
+  padding: 0px;
+}
+
+div.zetaprints-form dl {
+  margin-bottom: 10px;
+}
+
+div.zetaprints-form div.clear {
+  clear: both;
+}
+
+/**/
+div.product-shop dl {
+  margin-bottom: 5px;
+}
+
+/**/
+div.zetaprints-preview-button {
+  float: left;
+  margin-top: 25px;
+}
+
+/**/
+div.zetaprints-preview-button span {
+  display: none;
+  margin-left: 10px;
+  font-size: 85%;
+}
+
+/**/
+img.ajax-loader {
+  vertical-align: middle;
+  margin-left: 10px;
+  display: none;
+}
+
+div.save-order {
+  background: none;
+}
+
+div.save-order div.inner {
+  float: right;
+}
+
+input.disable, button.disable {
+  background-color: rgb(187, 187, 187);
+  border-color: rgb(187, 187, 187);
+  cursor: default;
+}
+
+div.save-order span {
+  margin-right: 10px;
+  font-size: 85%;
+}
+
+div.save-order img.ajax-loader {
+  vertical-align: middle;
+  margin-right: 10px;
+  display: none;
+}
+
+div.color-sample {
+  position: absolute;
+  height: 18px;
+  width: 30px;
+  top: 3px;
+  left: 10px;
+  cursor: pointer;
+  border: 1px dotted lightgray;
+  background-color: white;
+}
+
+div.color-sample label {
+  display: none;
+}
+
+input.input-text, textarea {
+  width:100%;
+}
