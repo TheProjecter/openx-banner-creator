@@ -1,0 +1,112 @@
+{*<!--
+qwer
+-->*}
+
+<div class="zetaprints-search">
+  <form>
+    <label>Size:
+      <select name="size">
+        <optgroup label="Rectangular">
+          <option value="180x150">180 x 150 (Rectangle)</option>
+          <option value="200x200">200 x 200 (Small square)</option>
+          <option value="250x250">250 x 250 (Square)</option>
+          <option value="240x400">240 x 400 (Vertical rectangle)</option>
+          <option value="300x250">300 x 250 (Medium rectangle)</option>
+          <option value="336x280">336 x 280 (Large rectangle)</option>
+        </optgroup>
+        <optgroup label="Banner and button ads">
+          <option value="80x15">80 x 15 (Micro button)</option>
+          <option value="88x31">88 x 31 (Micro bar)</option>
+          <option value="120x60">120 x 60 (Button 1)</option>
+          <option value="120x90">120 x 90 (Button 2)</option>
+          <option value="120x240">120 x 240 (Vertical banner)</option>
+          <option value="125x125">125 x 125 (Square button)</option>
+          <option value="234x60">234 x 60 (Half banner)</option>
+          <option value="468x60">468 x 60 (Full banner)</option>
+          <option value="728x90">728 x 90 (Leaderboard)</option>
+        </optgroup>
+        <optgroup label="Skyscraper ads">
+          <option value="120 x 600">120 x 600 (Skyscraper)</option>
+          <option value="160 x 600">160 x 600 (Wide skyscraper)</option>
+          <option value="300 x 600">300 x 600 (Half-page)</option>
+        </optgroup>
+      </select>
+    </label>
+    <label>Keywords:
+        <input type="text" name="keywords" />
+    </label>
+    <label>Return:
+      <select name="qty">
+        <option value="10">10 items</option>
+        <option value="20">20 items</option>
+        <option value="50">50 items</option>
+        <option value="100">100 items</option>
+      </select>
+    </label>
+    <input type="submit" value="Search" />
+    <span id="zetaprints-search-processing-message">
+      <img src="{$adminPluginWebPath}/zpBannerDesigner/images/ajax-loader.gif"/> Fetching search results&hellip;
+    </span>
+  </form>
+
+  <a href="#" id="zetaprints-show-search-results" class="button">
+    <div class="state">
+      <div class="arrow down"></div>
+      <div class="text">Show results</div>
+    </div>
+    <div class="state" style="display: none">
+      <div class="arrow up"></div>
+      <div class="text">Hide results</div>
+    </div>
+  </a>
+
+  <div class="clear"></div>
+  <div class="results"></div>
+</div>
+
+<div {if $bannerid != ''} style="display: block" {/if} class="zetaprints-form">
+  <form>
+    {if $bannerid == ''}
+    <div class="banner-options">
+      <label>Name: <font color="red">*</font>
+        <input id="banner-description" type="text" name="description" />
+      </label>
+
+      <label>Banner type:
+        <select id="banner-type" name="type">
+          <optgroup label="web">
+            <option selected="selected" value="web">Save banner to the webserver</option>
+          </optgroup>
+          <optgroup label="sql">
+            <option value="sql">Save banner to the database</option>
+          </optgroup>
+        </select>
+      </label>
+    </div>
+    {/if}
+
+    <div class="left-column">
+      <div class="inner">
+        {if $bannerid != ''} {$form[1]} {/if}
+      </div>
+
+      <input class="update-preview" type="button" value="Update" />
+      <input class="save-image" type="button" value="Save" />
+      <span id="zetaprints-update-processing-message" class="processing-message">
+        <img src="{$adminPluginWebPath}/zpBannerDesigner/images/ajax-loader.gif"/> Updating image&hellip;
+      </span>
+      <span id="zetaprints-save-processing-message" class="processing-message">
+        <img src="{$adminPluginWebPath}/zpBannerDesigner/images/ajax-loader.gif"/>
+        {if $bannerid == ''}Creating{else}Saving{/if} banner&hellip;
+      </span>
+    </div>
+
+    <div class="right-column">
+      {if $bannerid != ''} {$form[0]} {/if}
+    </div>
+
+    <div class="clear"></div>
+  </form>
+</div>
+{$template_id}
+{include file=js-scripts.html}

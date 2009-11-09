@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin>
+  <name>zpBannerDesigner</name>
+  <!-- <creationDate>2009-04-11</creationDate> -->
+  <author>Anatoly A. Kazantsev</author>
+  <authorEmail>anatoly.kazantsev@gmail.com</authorEmail>
+  <!-- <authorUrl></authorUrl> -->
+  <license>GNU GPL2</license>
+  <description>ZetaPrints service intergration component component</description>
+  <version>0.1-dev</version>
+  <oxversion>2.8.1</oxversion>
+  <extends>admin</extends>
+
+  <install>
+    <files>
+      <file path="{ADMINPATH}/">banner-designer.php</file>
+      <file path="{ADMINPATH}/">common.php</file>
+      <file path="{ADMINPATH}/css/">checks.css</file>
+      <file path="{ADMINPATH}/css/">colorpicker.css</file>
+      <file path="{ADMINPATH}/css/">dd.css</file>
+      <file path="{ADMINPATH}/css/">dd_arrow.gif</file>
+      <file path="{ADMINPATH}/css/">zp-style.css</file>
+      <file path="{ADMINPATH}/images/colorpicker/">blank.gif</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_background.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_hex.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_hsb_b.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_hsb_h.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_hsb_s.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_indic.gif</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_overlay.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_rgb_b.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_rgb_g.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_rgb_r.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_select.gif</file>
+      <file path="{ADMINPATH}/images/colorpicker/">colorpicker_submit.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_background.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_hex.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_hsb_b.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_hsb_h.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_hsb_s.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_indic.gif</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_rgb_b.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_rgb_g.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_rgb_r.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">custom_submit.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">select2.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">select.png</file>
+      <file path="{ADMINPATH}/images/colorpicker/">slider.png</file>
+      <file path="{ADMINPATH}/images/vchecks/">bottom_button_bg.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">bottom_button_bg_hover.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">bottom_button_left.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">bottom_button_left_hover.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">button_bg.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">button_bg_hover.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">button_left.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">button_left_hover.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">cross.png</file>
+      <file path="{ADMINPATH}/images/vchecks/">tick.png</file>
+      <file path="{ADMINPATH}/images/vchecks/">top_button_bg.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">top_button_bg_hover.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">top_button_left.gif</file>
+      <file path="{ADMINPATH}/images/vchecks/">top_button_left_hover.gif</file>
+      <file path="{ADMINPATH}/images/">ajax-loader.gif</file>
+      <file path="{ADMINPATH}/images/">ajax-loader-big.gif</file>
+      <file path="{ADMINPATH}/js/">colorpicker.js</file>
+      <file path="{ADMINPATH}/js/">jquery-qtip-1.0.0-rc3.min.js</file>
+      <file path="{ADMINPATH}/js/">jquery-ui-1.6.custom.min.js</file>
+      <file path="{ADMINPATH}/js/">jquery.dd.js</file>
+      <file path="{ADMINPATH}/js/">jquery.vchecks.js</file>
+      <file path="{ADMINPATH}/lib/">color-pickers-html.xslt</file>
+      <file path="{ADMINPATH}/lib/">common-templates.xslt</file>
+      <file path="{ADMINPATH}/lib/">common.php</file>
+      <file path="{ADMINPATH}/lib/">input-fields-html.xslt</file>
+      <file path="{ADMINPATH}/lib/">preview-images-html.xslt</file>
+      <file path="{ADMINPATH}/lib/">search-results-html.xslt</file>
+      <file path="{ADMINPATH}/lib/">stock-images-html.xslt</file>
+      <file path="{ADMINPATH}/lib/">zp-api.php</file>
+      <file path="{ADMINPATH}/templates/">designer-form.html</file>
+      <file path="{ADMINPATH}/templates/">js-scripts.html</file>
+    </files>
+
+    <navigation>
+      <admin>
+        <!--<menu addto="account-index" index="account-user-zp" link="plugins/zpBannerCreater/account-user-zp.php">ZetaPrints Options</menu>
+
+        <menu add="zp-banner-creater-menu" link="plugins/zpBannerCreater/options.php">ZetaPrints Banner Creater</menu>
+        <menu addto="zp-banner-creater-menu" index="zp-banner-creater-menu-options" link="plugins/zpBannerCreater/options.php">ZetaPrints Options</menu>-->
+      </admin>
+
+      <manager>
+        <menu insertafter="campaign-banners" index="banner-creater" link="plugins/zpBannerDesigner/banner-designer.php">Design banner</menu>
+        <menu addto="campaign-banners" index="banner-designer" link="plugins/zpBannerDesigner/banner-designer.php?clientid={clientid}&amp;campaignid={campaignid}&amp;bannerid={bannerid}">ZetaPrints banner designer</menu>
+        <menu addto="campaign-banners" index="banner-designer_new" exclusive="true" link="plugins/zpBannerDesigner/banner-designer.php">Design banner</menu>
+        <!--<menu addto="account-index" index="account-user-zp" link="plugins/zpBannerCreater/account-user-zp.php">ZetaPrints Options</menu>
+
+        <menu add="zp-banner-creater-menu" link="plugins/zpBannerCreater/options.php">ZetaPrints Banner Creater</menu>
+        <menu addto="zp-banner-creater-menu" index="zp-banner-creater-menu-options" link="plugins/zpBannerCreater/options.php">ZetaPrints Options</menu>-->
+      </manager>
+    </navigation>
+
+    <schema>
+      <mdb2schema>tables_zpBannerDesigner</mdb2schema>
+      <dboschema>db_schema</dboschema>
+      <dbolinks>db_schema.links</dbolinks>
+      <dataobject>Zpusers.php</dataobject>
+      <dataobject>Zpbanners.php</dataobject>
+    </schema>
+  </install>
+</plugin>
