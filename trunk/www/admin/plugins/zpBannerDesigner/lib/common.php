@@ -27,7 +27,7 @@ function get_text_fields ($xml) {
 }
 
 function get_image_fields ($xml) {
-  return zetaprints_get_html_from_xml($xml, 'stock-images', 'http://zetaprints.com/') . zetaprints_get_html_from_xml($xml, 'color-pickers', 'http://zetaprints.com/');
+  return zetaprints_get_html_from_xml($xml, 'stock-images', 'http://zetaprints.com/');
 }
 
 function search_ajax_request ($keywords, $size, $qty) {

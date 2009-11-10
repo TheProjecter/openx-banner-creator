@@ -14,11 +14,7 @@
   <install>
     <files>
       <file path="{ADMINPATH}/">banner-designer.php</file>
-      <file path="{ADMINPATH}/">common.php</file>
-      <file path="{ADMINPATH}/css/">checks.css</file>
       <file path="{ADMINPATH}/css/">colorpicker.css</file>
-      <file path="{ADMINPATH}/css/">dd.css</file>
-      <file path="{ADMINPATH}/css/">dd_arrow.gif</file>
       <file path="{ADMINPATH}/css/">zp-style.css</file>
       <file path="{ADMINPATH}/images/colorpicker/">blank.gif</file>
       <file path="{ADMINPATH}/images/colorpicker/">colorpicker_background.png</file>
@@ -46,28 +42,13 @@
       <file path="{ADMINPATH}/images/colorpicker/">select2.png</file>
       <file path="{ADMINPATH}/images/colorpicker/">select.png</file>
       <file path="{ADMINPATH}/images/colorpicker/">slider.png</file>
-      <file path="{ADMINPATH}/images/vchecks/">bottom_button_bg.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">bottom_button_bg_hover.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">bottom_button_left.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">bottom_button_left_hover.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">button_bg.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">button_bg_hover.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">button_left.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">button_left_hover.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">cross.png</file>
-      <file path="{ADMINPATH}/images/vchecks/">tick.png</file>
-      <file path="{ADMINPATH}/images/vchecks/">top_button_bg.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">top_button_bg_hover.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">top_button_left.gif</file>
-      <file path="{ADMINPATH}/images/vchecks/">top_button_left_hover.gif</file>
       <file path="{ADMINPATH}/images/">ajax-loader.gif</file>
       <file path="{ADMINPATH}/images/">ajax-loader-big.gif</file>
+      <file path="{ADMINPATH}/images/">color-picker-icon.png</file>
+      <file path="{ADMINPATH}/images/">color-picker-icon.gif</file>
       <file path="{ADMINPATH}/js/">colorpicker.js</file>
       <file path="{ADMINPATH}/js/">jquery-qtip-1.0.0-rc3.min.js</file>
       <file path="{ADMINPATH}/js/">jquery-ui-1.6.custom.min.js</file>
-      <file path="{ADMINPATH}/js/">jquery.dd.js</file>
-      <file path="{ADMINPATH}/js/">jquery.vchecks.js</file>
-      <file path="{ADMINPATH}/lib/">color-pickers-html.xslt</file>
       <file path="{ADMINPATH}/lib/">common-templates.xslt</file>
       <file path="{ADMINPATH}/lib/">common.php</file>
       <file path="{ADMINPATH}/lib/">input-fields-html.xslt</file>

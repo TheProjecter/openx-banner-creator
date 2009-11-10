@@ -68,6 +68,7 @@ jQuery(document).ready(function($) {
         $('#zetaprints-show-search-results').css('display', 'block');
 
         $('div.zetaprints-search div.results div.template').click(function () {
+          $('div.zetaprints-form').fadeOut(800);
           $('#zetaprints-form-loading').remove();
           $('#' + template_id).removeClass('selected')
           $('<div id="zetaprints-form-loading" />').css('opacity', 0.7).appendTo(this);
@@ -87,19 +88,30 @@ jQuery(document).ready(function($) {
               $('div.zetaprints-form div.right-column').html(data[0]);
               $('div.zetaprints-form div.left-column div.inner').html(data[1]);
 
-              form_elements();
-
               $('div.zetaprints-form input.update-preview').click(update_preview);
 
-              $('div.zetaprints-search div.results, div.zetaprints-form').fadeOut(500, function () {
-                $('#zetaprints-show-search-results div.state').css('display', 'none');
-                $('#zetaprints-show-search-results div.state:first').css('display', 'block');
-                $('#zetaprints-show-search-results').fadeIn(500);
+              var img_number = $('div.zetaprints-form img').size() - 2 ;
+              var loads = 0;
 
-                $('div.zetaprints-form').fadeIn(500);
-                $('#zetaprints-form-loading').remove();
-                $('#' + template_id).addClass('selected');
-              } );
+              $('div.zetaprints-form img').load(function () {
+                loads += 1;
+
+                if (loads == img_number) {
+                  $('div.zetaprints-search div.results').fadeOut(500, function () {
+                    $('div.zetaprints-form').css('visibility', 'hidden').css('display', 'block');
+                    form_elements();
+                    $('div.zetaprints-form').css('display', 'none').css('visibility', 'visible');
+
+                    $('#zetaprints-show-search-results div.state').css('display', 'none');
+                    $('#zetaprints-show-search-results div.state:first').css('display', 'block');
+                    $('#zetaprints-show-search-results').fadeIn(500);
+
+                    $('div.zetaprints-form').fadeIn(500);
+                    $('#zetaprints-form-loading').remove();
+                    $('#' + template_id).addClass('selected');
+                  });
+                }
+              });
             }
           });
         });
@@ -171,10 +183,29 @@ jQuery(document).ready(function($) {
   $('div.zetaprints-form form input.save-image').click(save_image);
 
   function form_elements () {
+    $('.zetaprints-stock-image-selector').each(function () {
+      var top_element = this;
+      var width = 0;
 
-    $('div.zetaprints-page-color-pickers ul.colors-selector li').each(function () {
-      var color_sample = $('div.color-sample', this);
-      var color_input = $('input.color', this);
+      $('div.images-scroller li', this).each(function() {
+        width = width + $(this).width();
+      });
+
+      $('div.images-scroller ul', this).width(width);
+
+      var input = $('input.stock-image', this)[0];
+      var color_sample = $('div.images-scroller .color-sample', this)
+
+      $(input).click(function () {
+        $(this).removeAttr('value').attr('disabled', true);
+        $(color_sample).css('background-color', 'white');
+        $('div.images-scroller .selected').removeClass('selected');
+      });
+
+      $('div.images-scroller img', this).click(function () {
+        $(color_sample).css('background-color', 'white');
+        $(input).val($(this).attr('id')).attr('checked', true).attr('disabled', false);
+      });
 
       $(color_sample).ColorPicker({
         color: '#804080',
@@ -191,11 +222,17 @@ jQuery(document).ready(function($) {
           return false;
         },
         onSubmit: function (hsb, hex, rgb, el) {
-          $(color_sample).css('backgroundColor', '#' + hex);
-          $(color_input).val('#' + hex).attr('checked', true).change();
+          $('div.images-scroller .image', top_element).removeClass('selected');
+          $(color_sample).css('backgroundColor', '#' + hex).parent().addClass('selected');
+          $(input).val('#' + hex).attr('checked', true).attr('disabled', false);
           $(el).ColorPickerHide();
         }
       });
+    });
+
+    $('div.images-scroller .image').click(function () {
+      $('div.images-scroller .image').removeClass('selected');
+      $(this).addClass('selected');
     });
 
     $('div.zetaprints-page-input-fields input[title], div.zetaprints-page-input-fields textarea[title]').qtip({
@@ -209,14 +246,12 @@ jQuery(document).ready(function($) {
           show: { delay: 1, solo: true, when: { event: 'focus' } },
           hide: { when: { event: 'unfocus' } }
     });
-
-    $('div.zetaprints-page-stock-images select.stock-images-selector').msDropDown();
-
-    $('div.zetaprints-page-color-pickers ul.colors-selector').vchecks();
   }
 
   {/literal}{if $bannerid != ''}{literal}
-    form_elements();
+    $(window).load(function () {
+      form_elements();
+    });
   {/literal}{/if}{literal}
 });
 //]]>
