@@ -1,17 +1,5 @@
 {* *}
 
-{* this is script which will be plugged on plugin page when added as a form element
- make sure the form element name adding this script is the same as template file without .html extension
- eg. this script should be added via 'campaign-script' name
- 
- When script is included it is assigned two variables:
-  - $plugin - contains plugin name, eg. 'oxMarket' 
-  - $pluginWebPath - absolute url to browser visible plugin directory eg. 'http://localhost/www/admin/plugins/oxMarket'. Can be used for to create a link to plugin's js/css
-  
- Also, there is a global variable available:
- - $adminPluginWebPath - absolute url to browser visible admin plugins directorory eg. 'http://localhost/www/admin/plugins' - this could be used if eg. to reference resources of another plugin
- 
- *}
 <script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery-ui-1.6.custom.min.js"></script>
 <script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/colorpicker.js"></script>
 <script type="text/javascript" src="{$adminPluginWebPath}/zpBannerDesigner/js/jquery-qtip-1.0.0-rc3.min.js"></script>
