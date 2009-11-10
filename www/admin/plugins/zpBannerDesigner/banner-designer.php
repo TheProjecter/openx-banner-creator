@@ -1,6 +1,16 @@
 <?php
 
-require_once 'common.php';
+require_once '../../../../init.php';
+require_once '../../config.php';
+
+require_once MAX_PATH . '/lib/OA/Admin/TemplatePlugin.php';
+require_once MAX_PATH . '/lib/OA/Admin/UI/component/Form.php';
+
+require_once('lib/common.php');
+
+$admin_ui = OA_Admin_UI::getInstance();
+$admin_ui->registerStylesheetFile(MAX::constructURL(MAX_URL_ADMIN, 'plugins/zpBannerDesigner/css/colorpicker.css'));
+$admin_ui->registerStylesheetFile(MAX::constructURL(MAX_URL_ADMIN, 'plugins/zpBannerDesigner/css/zp-style.css'));
 
 phpAds_registerGlobalUnslashed('bannerid', 'campaignid', 'clientid', 'ajax', 'size', 'keywords', 'qty', 'template_id', 'image_url', 'description', 'type');
 
