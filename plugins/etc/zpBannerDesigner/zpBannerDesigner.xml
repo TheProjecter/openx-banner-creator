@@ -63,7 +63,7 @@
     <navigation>
       <manager>
         <menu insertafter="campaign-banners" index="banner-creater" link="plugins/zpBannerDesigner/banner-designer.php">Design banner</menu>
-        <menu addto="campaign-banners" index="banner-designer" link="plugins/zpBannerDesigner/banner-designer.php?clientid={clientid}&amp;campaignid={campaignid}&amp;bannerid={bannerid}">ZetaPrints banner designer</menu>
+        <menu addto="campaign-banners" index="banner-designer" link="plugins/zpBannerDesigner/banner-designer.php?clientid={clientid}&amp;campaignid={campaignid}&amp;bannerid={bannerid}">Designer</menu>
         <menu addto="campaign-banners" index="banner-designer_new" exclusive="true" link="plugins/zpBannerDesigner/banner-designer.php">Design banner</menu>
       </manager>
     </navigation>

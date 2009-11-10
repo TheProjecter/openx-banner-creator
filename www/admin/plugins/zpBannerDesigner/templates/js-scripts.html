@@ -10,7 +10,11 @@
 {literal}
 //<![CDATA[
 jQuery(document).ready(function($) {
+  {/literal}{if $template_id != ''}{literal}
+  template_id = '{/literal}{$template_id}{literal}';
+  {/literal}{else}{literal}
   template_id = '';
+  {/literal}{/if}{literal}
 
   $('#thirdLevelTools ul li:first a').attr('href', 'http://www.zetaprints.com/help/openx-image-generator/');
 
@@ -76,8 +80,6 @@ jQuery(document).ready(function($) {
               $('div.zetaprints-form div.right-column').html(data[0]);
               $('div.zetaprints-form div.left-column div.inner').html(data[1]);
 
-              $('div.zetaprints-form input.update-preview').click(update_preview);
-
               var img_number = $('div.zetaprints-form img').size() - 2 ;
               var loads = 0;
 
@@ -138,6 +140,8 @@ jQuery(document).ready(function($) {
         }
     });
   }
+
+  $('div.zetaprints-form input.update-preview').click(update_preview);
 
   function save_image () {
     $('#zetaprints-save-processing-message').css('display', 'inline');
