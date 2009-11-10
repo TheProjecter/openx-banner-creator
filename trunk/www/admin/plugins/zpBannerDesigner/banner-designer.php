@@ -116,7 +116,8 @@ function display_page($banner_id, $campaign_id, $client_id) {
   displayNavigationBanner($page_name, $other_campaigns, $other_banners, $entities);
 
   if (!empty($banner_id)) {
-    $form = explode('|', form_ajax_request(OA_Dal::factoryDO('Zpbanners')->get_zp_banner_id((int)$banner_id)));
+    $template_id = OA_Dal::factoryDO('Zpbanners')->get_zp_banner_id((int)$banner_id);
+    $form = explode('|', form_ajax_request($template_id));
   }
 
   $template = new OA_Plugin_Template('designer-form.html', 'bannerDesigner');
@@ -124,6 +125,7 @@ function display_page($banner_id, $campaign_id, $client_id) {
   $template->assign('bannerid', $banner_id);
   $template->assign('campaignid', $campaign_id);
   $template->assign('clientid', $client_id);
+  $template->assign('template_id', $template_id);
   $template->assign('form', $form);
 
   $template->display();
