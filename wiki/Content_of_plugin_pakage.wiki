@@ -1,35 +1,15 @@
-= Introduction =
+= _plugins/etc/_ directory =
+  * `ZetaPrintsExtension.xml` - Extension description file
+  * `zpBannerDesigner/zpBannerDesigner.xml` - Plugin description file
+  * `zpBannerDesigner/etc/tables_zpBannerDesigner.xml` - Database scheme description
+  * `zpBannerDesigner/etc/DataObjects/db_schema.ini` - Tables description
+  * `zpBannerDesigner/etc/DataObjects/Zpbanners.php` - Data object for _zpbanners_ table
+  * `zpBannerDesigner/etc/DataObjects/Zpusers.php` - Data object for _zpusers_ table
 
-Плагин openXZetaPrints имеет структуру согласно спецификации плагинов для OpenX 2.8
-
-плагин содержит следующие файлы.
-
-{{{
-plugins/etc/openXZetaPrints.readme.txt
-plugins/etc/openXZetaPrints.uninstall.txt
-plugins/etc/openXZetaPrints.xml
-
-plugins/etc/oxZetaPrints/oxZetaPrints.xml
-plugins/etc/oxZetaPrints/_lang
-
-plugins/etc/oxZetaPrints/etc/postscript_install_ZetaPrints.php
-
-plugins/oxZetaPrints/account-user-zp.php
-plugins/oxZetaPrints/oxZetaPrints.class.php
-}}}
-
-*plugins/etc/openXZetaPrints.readme.txt* - фаил с текстом показываемым пользователю перед установкой.
-
-*plugins/etc/openXZetaPrints.uninstall.txt* - фаил с текстом показываемым пользователю перед удалением
-
-*plugins/etc/openXZetaPrints.xml* - служебный фаил плагина с описанием названия, версии и файлов входящих в состав архива.
-
-*plugins/etc/oxZetaPrints/oxZetaPrints.xml* - служебный фаил плагина с описанием файлов входящих в состав плагина.
-
-*plugins/etc/oxZetaPrints/etc/postscript_install_ZetaPrints.php* - фаил запускающийся при установке плагина, производит модификацию файлов и БД OpenX
-
-*plugins/oxZetaPrints/account-user-zp.php* - интеревейс конфигурирования zetapitns аккаунта, копируется в папку www/admin
-
-*plugins/oxZetaPrints/oxZetaPrints.class.php* - класс плагина. Содержит метод выдающий название.
-
-  * Automatic links to other wiki pages
+= _www/admin/plugins/zpBannerDesigner_ directory =
+  * `banner-designer.php` - Controller for banner designer page
+  * `lib\common.php` - Common functions for plugin interface
+  * `lib\zp-api.php` - ZetaPrints API
+  * `lib\*.xslt` - XSLT files for ZetaPrints response converting
+  * `templates\designer-form.html` - Template for banner designer page
+  * `templates\js-scripts.html` - JavaScript code for banner designer page
