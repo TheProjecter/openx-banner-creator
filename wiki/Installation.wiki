@@ -1,4 +1,4 @@
-#summary Describes plugin installation
+#summary Plugin installation instructions
 
 = Plugin installation =
 
