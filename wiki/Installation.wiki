@@ -6,8 +6,7 @@ Download the latest version of the plugin matching your current version of OpenX
 
  * Log into OpenX as an admin
  * Switch to Administrator account
- * Go to Configuration tab
- * Click on Plugins in the menu on the left
+ * Go to _Plugins_ tab
  * Choose the downloaded plugin (a zip file) and click Install
 
 = Plugin updating =
